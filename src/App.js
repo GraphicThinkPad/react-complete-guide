@@ -35,9 +35,8 @@ class App extends Component {
   };
 
   togglePersonsHandler = () => {
-    this.state.showPersons
-      ? this.setState({ showPersons: false })
-      : this.setState({ showPersons: true });
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
   };
 
   render() {
@@ -48,7 +47,6 @@ class App extends Component {
       padding: "8px",
       cursor: "pointer",
     };
-
     return (
       <div className="App">
         <h1>Hi, I'm a React App!</h1>
