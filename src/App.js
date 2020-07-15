@@ -12,14 +12,26 @@ class App extends Component {
     otherState: "Some other value",
   };
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: "Max", age: 28 },
-        { name: event.target.value, age: 25 },
-        { name: "Sydney", age: 26 },
-      ],
-    });
+  nameChangedHandler = (event, id) => {
+
+   // Of the array "persons", which has the index that's the same as the one passed as an arg?
+   const personIndex = this.state.persons.findIndex(p => {
+     return p.id === id
+   });
+
+   // Make a copy of the object with that id
+   const person = {...this.state.persons[personIndex]}
+
+   // Change it's name to whatever value was input into the text box
+   person.name = event.target.value;
+
+   // Make a copy of the original array.
+   const persons = [...this.state.persons];
+
+   // Update only the person whose index we got as an arg
+   persons[personIndex] = person;
+
+   this.setState({persons})
   };
 
   togglePersonsHandler = () => {
@@ -52,6 +64,7 @@ class App extends Component {
             click={() => this.deletePersonHandler(index)}
             name={person.name}
             key={person.id}
+            changed={(event) => this.nameChangedHandler(event, person.id)}
             age={person.age} />;
           })}
         </div>
