@@ -17,10 +17,10 @@ const cockpit = (props) => {
 
   return (
     <div>
-      <h1>Hi, I'm a React App!</h1>
-      <p className={assignedClasses.join(" ")}>This is really working!</p>
+      <h1>I'm a React app titled {props.title}</h1>
+  <p className={assignedClasses.join(" ")}>This is really working! </p>
       <button
-        alt={props.showPersons}
+        alt={props.showPersons ? 1 : 0}
         onClick={props.clicked}
         className={buttonClasses.join(" ")}
       >

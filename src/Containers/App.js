@@ -4,6 +4,11 @@ import Persons from "../Components/Persons/Persons";
 import Cockpit from "../Components/Cockpit/Cockpit";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
+
   state = {
     persons: [
       { id: "as", name: "Max", age: 28 },
@@ -13,6 +18,15 @@ class App extends Component {
     otherState: "Some other value",
     showPersons: false,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props)
+    return props
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
+  }
 
   nameChangedHandler = (event, id) => {
     // Of the array "persons", which has the index that's the same as the one passed as an arg?
@@ -47,6 +61,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("[App.js] rendering...")
     let persons = null;
 
     if (this.state.showPersons) {
