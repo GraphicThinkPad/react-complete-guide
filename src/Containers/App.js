@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./App.css";
 import Persons from "../Components/Persons/Persons";
 import Cockpit from "../Components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
 
 class App extends Component {
   constructor(props) {
@@ -21,12 +22,12 @@ class App extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    console.log("[App.js] getDerivedStateFromProps", props)
-    return props
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return props;
   }
 
   componentDidMount() {
-    console.log('[App.js] componentDidMount')
+    console.log("[App.js] componentDidMount");
   }
 
   nameChangedHandler = (event, id) => {
@@ -62,7 +63,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("[App.js] rendering...")
+    console.log("[App.js] rendering...");
     let persons = null;
 
     if (this.state.showPersons) {
@@ -76,17 +77,24 @@ class App extends Component {
     }
 
     return (
-      <div className={styles.App}>
-        <button onClick={() => {this.setState({showCockpit: false})}}>Remove Cockpit</button>
-        {this.state.showCockpit ? <Cockpit
-          title={this.props.appTitle}
-          persons={this.state.persons}
-          showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler}
-        />
-        : null}
+      <WithClass classes={styles.App}>
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            persons={this.state.persons}
+            showPersons={this.state.showPersons}
+            clicked={this.togglePersonsHandler}
+          />
+        ) : null}
         {persons}
-      </div>
+      </WithClass>
     );
     // ^ The above and below are the same
     // return React.createElement('div', {className: "App"}, React.createElement('h1', null, "Does this work now?"))
