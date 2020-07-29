@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from "./App.css";
+import styles from "./App.css";
 import Persons from "../Components/Persons/Persons";
 import Cockpit from "../Components/Cockpit/Cockpit";
 
@@ -17,6 +17,7 @@ class App extends Component {
     ],
     otherState: "Some other value",
     showPersons: false,
+    showCockpit: true,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -75,13 +76,15 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-        <Cockpit
+      <div className={styles.App}>
+        <button onClick={() => {this.setState({showCockpit: false})}}>Remove Cockpit</button>
+        {this.state.showCockpit ? <Cockpit
           title={this.props.appTitle}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler}
         />
+        : null}
         {persons}
       </div>
     );

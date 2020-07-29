@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./Cockpit.css";
 
 const cockpit = (props) => {
+
+useEffect(() => {
+  setTimeout(() => {
+    // alert("I saved data to the cloud")
+  }, 1000)
+}, [])
+
   let assignedClasses = [];
   if (props.persons.length <= 2) {
     assignedClasses.push(styles.red);
@@ -30,4 +37,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default React.memo(cockpit);
